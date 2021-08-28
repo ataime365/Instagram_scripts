@@ -43,7 +43,7 @@ class Spider():
         username.clear()
         password.clear()
         username.send_keys('Splendor_clothing')
-        password.send_keys('159357')
+        password.send_keys('Indigo89')
         Log_in = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type="submit"]'))).click()
         time.sleep(5)
         # Not_now = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//button[contains(text(), "Not Now")]'))).click()
@@ -70,7 +70,7 @@ class Spider():
             print(n_scrolls)
 
             li = []   #replace 2 with n_scrolls
-            for _ in range(0, 2): #n_scrolls #do this for 2 scrolls first, if it returns more than 96, run it for the 158 scrools == n_scrolls
+            for _ in range(0, n_scrolls): #n_scrolls #do this for 2 scrolls first, if it returns more than 96, run it for the 158 scrools == n_scrolls
 
                 image2 = [] #we need the urls of the images to be in  a list
                 for i in range(0, 5):
@@ -94,11 +94,14 @@ class Spider():
 
 
         for url in set(All_image_links):
-            driver.get(url)
-            time.sleep(randint(5,8))
-            name = driver.find_element_by_xpath("//div[@class='e1e1d']/span/a").get_attribute('href')
-            row = [name]
-            self.all_influencers_link.append(row)
+            try:
+                driver.get(url)
+                time.sleep(randint(5,8))
+                name = driver.find_element_by_xpath("//div[@class='e1e1d']/span/a").get_attribute('href')
+                row = [name]
+                self.all_influencers_link.append(row)
+            except Exception:
+                pass
 
 
 

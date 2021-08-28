@@ -39,7 +39,7 @@ class Scraper():
 
         # Unique URLs
         self.url_list = set(url_list)
-        print(self.url_list)
+        # print(self.url_list)
 
         self.driver = driver            #keys one side, then append the values
         self.instagram = [list(self.instagram_data.keys())] #changes it from a dictionary to a list and then to a list of lists
@@ -56,7 +56,7 @@ class Scraper():
         username.clear()
         password.clear()
         username.send_keys('Splendor_clothing')
-        password.send_keys('159357')
+        password.send_keys('Indigo89')
         Log_in = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type="submit"]'))).click()
         time.sleep(5)
         # Not_now = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//button[contains(text(), "Not Now")]'))).click()
@@ -68,7 +68,7 @@ class Scraper():
             for r in self.instagram:
                 writer.writerow(r)
 
-    def convert_views(self, follower_cnt):
+    def convert_views(self, follower_cnt): #This convets the follower counts to numbers
         if 'k' in follower_cnt:
             followers = float(follower_cnt.replace(',', '').split('k')[0]) * 1000
             return followers
@@ -88,7 +88,7 @@ class Scraper():
         for name_url in self.url_list:
             if name_url == 'influencers_links':
                 continue
-            print(name_url)
+            # print(name_url)
             try:
                 name_url = name_url.strip()
                 driver.get(name_url)
@@ -104,7 +104,7 @@ class Scraper():
             except Exception:
                 pass
 
-        self.driver.quit()
+        driver.quit()
         self.wr()
 
 
